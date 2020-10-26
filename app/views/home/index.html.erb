@@ -10,6 +10,9 @@
     <h1>Page d'accueil</h1>
       <br/>
       <br/>
+      <h3>Bienvenue !</h3>
+      <br/>
+      <br/>
         <% @gossips.each do |gossip|%>
         <div class="card">
         <div class="card-header">
@@ -18,7 +21,7 @@
           <div class="card-body">
           <blockquote class="blockquote mb-0">
             <p><%= gossip.content%></p>
-            <footer class="blockquote-footer"><%= gossip.user[:first_name]%><cite title="Source Title"><%= gossip.title%></cite></footer>
+            <footer class="blockquote-footer"><%= gossip.user[:first_name]%><cite title="Source Title"> <%= gossip.title%></cite></footer>
           </blockquote>
           </div>
         </div>
