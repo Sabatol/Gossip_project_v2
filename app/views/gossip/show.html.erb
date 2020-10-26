@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>The Gossip Project</title>
+    <!-- On peut avoir d'autres méta-données ici -->
+  </head>  
+  <body>
+  <header>
+
+  </header>
+
+    <h1>Page d'accueil</h1>
+      <p>>>>>>>>> Bienvenue <%= params["id"]%>  !!! <<<<<<<<
+      <br/>
+      <br/> 
+      <p>Son auteur : <%= @gossip.user[:first_name] %></p>
+      <p>Le contenu du potin : <%= @gossip.content %></p>
+      <p>La date de création du potin : <%= @gossip.created_at %></p>
+  </body>
+      <%= link_to "Voir le profil du créateur !", user_path(@gossip.user[:id]), :class =>"btn btn-info" %>
+      <%= link_to "Retour !", root_path, :class =>"btn btn-secondary" %>
+</html>

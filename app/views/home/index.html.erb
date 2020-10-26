@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>The Gossip Project</title>
+    <!-- On peut avoir d'autres méta-données ici -->
+  </head>
+  <body>
+
+    <h1>Page d'accueil</h1>
+      <br/>
+      <br/>
+        <% @gossips.each do |gossip|%>
+      <p><%= gossip.title%></p>
+      <p><%= gossip.user[:first_name]%></p>
+      </p>
+      <%= link_to "Accéder au gossip", gossip_path(gossip.id), :class =>"btn btn-info" %>
+      <br/>
+      <br/>
+      <br/>
+      <% end %>
+  </body>
+</html>
