@@ -4,8 +4,9 @@ class GossipsController < ApplicationController
     @cities = City.all
   end
   def show
-    id = params[:id]
     @gossip = Gossip.find(params[:id])
+    @comments = @gossip.comments
+    @comment = Comment.new
   end
   def new
     @gossip = Gossip.new

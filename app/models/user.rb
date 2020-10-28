@@ -9,4 +9,5 @@ class User < ApplicationRecord
   has_many :gossips
   has_many :send_messages, class_name: "PrivateMessage"
   has_many :received_messages, class_name: "PrivateMessage", through: :pm_users
+  has_many :comments
 end

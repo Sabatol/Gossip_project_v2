@@ -1,43 +1,45 @@
 class CommentsController < ApplicationController
   def index
     @comments = Comment.all
-    @cities = City.all
   end
   def show
     id = params[:id]
-    @comment= Comment.find(params[:id])
+    @comment = Comment.find(params[:comment_id])
   end
   def new
-    @comment= Comment.new
+    id = params[:id]
+    @comment = Comment.new
   end
   def create
-    @comment= Comment.new(user: User.first, content: params[:content], title: params[:title])
-    if @commentsave
+    id1 = params[:gossip_id]
+    id2 = params[:user_id]
+    @comment = Comment.new(content: params[:content], gossip_id: id1, user: User.first)
+    puts "Test #{@comment.content}"
+    puts "#{@comment.errors.messages}"
+    if @comment.save
       puts "#########################"
       puts "Comment créé avec succès !"
       puts "#########################"
-      redirect_to root_path
+      redirect_to gossip_path(params[:gossip_id])
     else
-      render 'new' 
       flash[:alert] = "Echec de la quête !"
+      redirect_to gossip_path(params[:gossip_id])
     end
   end
   def edit
-    @comment= Comment.find(params[:id])
+    @comment = Comment.find(params[:id])
   end
 
   def update
-    @comment= Comment.find(params[:id])
-    post_params = params.require(:Comment).permit(:title, :content)
-    @commentupdate(post_params)
-    if @commentupdate(post_params)
-      redirect_to root_path
+    @comment = Comment.find(params[:id])
+    if @comment.update(content: params[:content])
+      redirect_to gossip_path(params[:gossip_id])
     else
       render :edit
     end
   end
   def destroy
-    @comment= Comment.find(params[:id])
+    @comment = Comment.find(params[:comment_id])
     @comment.destroy
     redirect_to root_path
   end

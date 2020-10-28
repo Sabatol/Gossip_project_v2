@@ -12,6 +12,7 @@ Tag.destroy_all
 PrivateMessage.destroy_all
 PmUser.destroy_all
 GoTag.destroy_all
+Comment.destroy_all
 
 
 require 'faker'
@@ -22,6 +23,7 @@ gossips = []
 tags = []
 private_messages = []
 pm_users = []
+comments = []
 
 20.times do
   city = City.create(name: Faker::Address.city, zip_code: Faker::Address.zip_code)
@@ -58,4 +60,9 @@ end
   random = rand(1..10)
   pm_user = PmUser.create(private_message: private_messages.sample, user: users.sample)
   pm_users << pm_user
+end
+
+100.times do
+  comment = Comment.create(content: Faker::Games::WorldOfWarcraft.quote, user: users.sample, gossip: gossips.sample)
+  comments << comment
 end

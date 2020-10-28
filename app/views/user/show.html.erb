@@ -9,7 +9,9 @@
   <header>
 
   </header>
-  <h1>Voici la page de <%= @user.first_name %> !</h1>
+  <br/>
+  <br/>
+  <h1>VOUS ÊTES SUR LA PAGE DE <%= @user.first_name %> !</h1>
   <ul>
 <li>Prénom : <%= @user.first_name %></li>
 <li>Nom : <%= @user.last_name%></li>
@@ -17,6 +19,22 @@
 <li>Age : <%= @user.age%></li>
 <li>Ville : <%= @user.city[:name]%></li>
 <li>Description : <%= @user.description%></li></ul>
-<p><%= link_to "Retour !", root_path, :class =>"btn btn-secondary" %></p>
+    
+    <% @gossips.each do |gossip|%>
+      <div class="card">
+        <div class="card-header">
+          Potin n°<%= gossip.id%>
+        </div>
+        <div class="card-body">
+          <blockquote class="blockquote mb-0">
+            <p><%= gossip.content%></p>
+            <footer class="blockquote-footer"><%= gossip.user[:first_name]%><cite title="Source Title"> <%= gossip.title%></cite></footer>
+          </blockquote>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <br/>
+    <% end %>
   </body>
 </html>
