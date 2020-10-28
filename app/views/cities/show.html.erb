@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>The Gossip Project</title>
+    <!-- On peut avoir d'autres méta-données ici -->
+  </head>  
+  <body>
+  <header>
+
+  </header>
+  <h2>Ville : <%= @city.name %></h2>
+  <p>Zip_code : <%= @city.zip_code%></p>  
+
+  
+        <% @city.users.each do |user|%>
+          <p>Prénom : <%= user.first_name%></p>
+          <p>Nom : <%= user.last_name%></p>
+          <p>Description : <%= user.description%></p>
+          <p>Email : <%= user.email%></p>
+          <p>Age : <%= user.age%></p>
+          <p><% user.gossips.each do |gossip|%></p>
+          <p>Titre du potin n°<%= gossip.id%> : <%= gossip.title%></p>
+          <p>Contenu du potin n°<%= gossip.id%> : <%= gossip.content%></p>
+          <% end %>
+        <% end %>
+
+
+  </body>
+</html>

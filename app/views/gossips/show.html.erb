@@ -10,13 +10,12 @@
 
   </header>
 
-    <h1>Page d'accueil</h1>
       <p>Bienvenue <%= params["id"]%> !
       <br/>
       <br/> 
-      <div class="card">
+      <div class="card text-center">
         <div class="card-header">
-          Quote
+          Voici le Gossip que tu cherchais !
         </div>
         <div class="card-body">
           <blockquote class="blockquote mb-0">
@@ -24,8 +23,11 @@
             <footer class="blockquote-footer"><%= @gossip.title %><cite title="Source Title">  <%= @gossip.created_at %></cite></footer>
           </blockquote>
         </div>
-      </div>
+        <p><%= link_to "Détruire un gossip", @gossip.destroy, :class =>"btn btn-info" %></p>
+        <p><%= link_to "Voir le profil du créateur !", user_path(@gossip.user[:id]), :class =>"btn btn-info" %></p>
+        <p><%= link_to "Accéder à la ville", city_path(@gossip.user.city), :class =>"btn btn-info" %></p>
+      </div>        
+
   </body>
-      <p><%= link_to "Voir le profil du créateur !", user_path(@gossip.user[:id]), :class =>"btn btn-info" %></p>
-      <p><%= link_to "Retour !", root_path, :class =>"btn btn-secondary" %></p>
+
 </html>

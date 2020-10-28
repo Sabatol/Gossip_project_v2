@@ -1,3 +1,23 @@
 // Place all the styles related to the gossip controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.card {
+  border: 100px solid black;
+  -webkit-box-shadow: 18px 18px 4px 6px rgba(0,0,0,0.85); 
+  box-shadow: 18px 18px 4px 6px rgba(0,0,0,0.85);
+  margin-right: 2rem;
+  margin-left: 2rem;
+  }
+
+.card-header { 
+  background: rgb(69,249,255);
+  background: linear-gradient(163deg, rgba(69,249,255,1) 0%, rgba(255,174,0,1) 92%); }
+
+h1 {
+
+  letter-spacing: .15em;
+  text-shadow: 1px -1px 0 #767676, -1px 2px 1px #737272, -2px 4px 1px #767474, -3px 6px 1px #787777, -4px 8px 1px #7b7a7a, -5px 10px 1px #7f7d7d, -6px 12px 1px #828181, -7px 14px 1px #868585, -8px 16px 1px #8b8a89, -9px 18px 1px #8f8e8d, -10px 20px 1px #949392, -11px 22px 1px #999897, -12px 24px 1px #9e9c9c;
+
+}

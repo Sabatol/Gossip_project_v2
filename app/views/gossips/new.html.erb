@@ -1,0 +1,45 @@
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>The Gossip Project</title>
+    <!-- On peut avoir d'autres méta-données ici -->
+  </head>
+  <body>
+    <!-- ... -->
+  <div class="text-center nt-5">
+    <%= form_tag url_for(action: 'create'), method: "post" do %>
+      <!-- Authenticity token sur une ligne -->
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      
+      <%= label_tag 'Title' %> <br/>
+      <%= text_field_tag 'title', @gossip.title %>
+      <br /> <br />
+
+      <%= label_tag 'Content' %> <br/>
+      <%= text_area_tag 'content', @gossip.content %>
+      <br /> <br />
+
+      <%= submit_tag "Create Gossip" %>
+      <br/>
+      <br/>
+
+
+      <% if @gossip.save %>
+        <div class="alert alert-success" role="alert">
+          <strong>Nice !</strong> Ton gossip a été créé avec succès !
+        </div>
+      <% end %>
+
+
+      <% if flash[:alert]%>
+        <div class="alert alert-danger" role="alert">
+          <strong>Echec !</strong> Une erreur s'est produite dans la création de ton gossip !
+        </div>
+      <% end %>
+
+
+    <% end %>
+  </div>
+    <!-- ... -->
+  </body>
+</html>

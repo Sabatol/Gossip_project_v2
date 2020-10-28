@@ -15,8 +15,17 @@
  */
 
 h1 {
-  text-align: center;
+  text-align:center;
 }
-p {
+
+.card {
+  border: 2px solid black;
+}
+
+* {
   padding: 0.2rem;
+}
+
+p {
+  text-align: justify;
 }

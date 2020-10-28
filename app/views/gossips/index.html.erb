@@ -6,8 +6,9 @@
     <!-- On peut avoir d'autres méta-données ici -->
   </head>
   <body>
-
-    <h1>Page d'accueil</h1>
+      <br/>
+      <br/>
+    <h1><strong>PAGE D'ACCUEIL</strong></h1>
       <br/>
       <br/>
       <h3>Bienvenue !</h3>
@@ -16,7 +17,7 @@
         <% @gossips.each do |gossip|%>
         <div class="card">
         <div class="card-header">
-          Quote
+          Potin n°<%= gossip.id%>
         </div>
           <div class="card-body">
           <blockquote class="blockquote mb-0">
@@ -25,7 +26,11 @@
           </blockquote>
           </div>
         </div>
+      <br/>
+      <br/>
       <%= link_to "Accéder au gossip", gossip_path(gossip.id), :class =>"btn btn-info" %>
+      <%= link_to "Accéder à la ville", city_path(gossip.user.city), :class =>"btn btn-info" %>
+      <br/>
       <br/>
       <br/>
       <br/>
