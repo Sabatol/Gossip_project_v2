@@ -20,7 +20,7 @@ class GossipsController < ApplicationController
       redirect_to root_path
     else
       render 'new' 
-      flash[:alert] = "Echec de la quête !"
+      flash[:alert] = "Echec de la création !"
     end
   end
   def edit

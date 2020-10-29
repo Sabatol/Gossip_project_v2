@@ -3,7 +3,6 @@ class CommentsController < ApplicationController
     @comments = Comment.all
   end
   def show
-    id = params[:id]
     @comment = Comment.find(params[:comment_id])
   end
   def new
@@ -11,18 +10,14 @@ class CommentsController < ApplicationController
     @comment = Comment.new
   end
   def create
-    id1 = params[:gossip_id]
-    id2 = params[:user_id]
-    @comment = Comment.new(content: params[:content], gossip_id: id1, user: User.first)
-    puts "Test #{@comment.content}"
-    puts "#{@comment.errors.messages}"
+    @comment = Comment.new(content: params[:content], gossip_id: params[:gossip_id], user: User.first)
     if @comment.save
       puts "#########################"
       puts "Comment créé avec succès !"
       puts "#########################"
       redirect_to gossip_path(params[:gossip_id])
     else
-      flash[:alert] = "Echec de la quête !"
+      flash[:alert] = "Echec de la création !"
       redirect_to gossip_path(params[:gossip_id])
     end
   end
@@ -39,8 +34,8 @@ class CommentsController < ApplicationController
     end
   end
   def destroy
-    @comment = Comment.find(params[:comment_id])
+    @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_to root_path
+    redirect_to gossip_path(params[:gossip_id])
   end
 end
