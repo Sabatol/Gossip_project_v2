@@ -1,5 +1,6 @@
 class LikesController < ApplicationController
   before_action :authenticate_user
+
   def new
     @like = Like.new
   end
@@ -16,17 +17,14 @@ class LikesController < ApplicationController
 
   def destroy
     @like = Like.find(params[:id])
-    if session[:user_id] != @like.user_id
-      redirect_to new_session_path
-    else
-      @like.destroy
-      redirect_to gossip_path(params[:gossip_id])
-    end
+    @like.destroy
+    redirect_to gossip_path(params[:gossip_id])
   end
 
   private 
 
   def authenticate_user
+    current_user = User.find_by(id: session[:user_id])
     unless current_user
       flash[:danger] = "Please log in."
       redirect_to new_session_path

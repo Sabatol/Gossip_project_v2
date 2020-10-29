@@ -5,9 +5,12 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<!-- CSS -->
     <%= stylesheet_link_tag 'application' %> 
+<!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<!-- FontAwesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous"> 
 <!--ligne du paradis-->
     <%= javascript_include_tag 'application' %>
 
@@ -27,36 +30,31 @@
       </li>    
 
       <li class="nav-item">
-      <%= link_to "S'inscrire", new_user_path, :class =>"nav-link" %>
-      </li>
-      <% if session[:user_id] == nil %>
-        <li class="nav-item">
-        <%= link_to "Se connecter", new_session_path, :class =>"nav-link" %>
-        </li>
-      <% else %>
-        <li class="nav-item">
-        <%= link_to "Créer un Gossip", new_gossip_path, :class =>"nav-link" %>
-        </li>
-        <li class="nav-item">
-        <%= link_to "Se déconnecter", session_path(session.id), method: :delete, data:{confirm: "Tu veux vraiment te déconnecter ?"}, :class =>"nav-link" %>
-        </li>      
-      <% end %>
-      <li class="nav-item">
       <%= link_to "Notre équipe", team_path, :class =>"nav-link" %>
       </li>
       <li class="nav-item">
       <%= link_to "Contact", contact_path, :class =>"nav-link" %>
       </li>      
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Nos oeuvres
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Salut !</a>
-          <a class="dropdown-item" href="#">T'es pas sensé être là.</a>
-          <a class="dropdown-item" href="#">Il n'y a rien pour toi ici...</a>
+
+      <% if session[:user_id] == nil %>
+        <div class="dropdown">
+          <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Se connecter/S'inscrire
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <%= link_to "S'inscrire", new_user_path, :class =>"dropdown-item" %>
+            <%= link_to "Se connecter", new_session_path, :class =>"dropdown-item" %>
+          </div>
         </div>
-      </li>
+
+      <% else %>
+        <li class="nav-item">
+        <%= link_to "Créer un Gossip", new_gossip_path, :class =>"btn btn-primary" %>
+        </li>
+        <li class="nav-item">
+        <%= link_to "Se déconnecter", session_path(session.id), method: :delete, data:{confirm: "Tu veux vraiment te déconnecter ?"}, :class =>"btn btn-danger" %>
+        </li>      
+      <% end %>
     </ul>
   </div>
   </nav>

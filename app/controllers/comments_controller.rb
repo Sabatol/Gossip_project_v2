@@ -19,10 +19,10 @@ class CommentsController < ApplicationController
         puts "#########################"
         puts "Comment créé avec succès !"
         puts "#########################"
-        redirect_to gossip_path(params[:gossip_id])
+        redirect_to gossip_path(@comment.gossip.id)
       else
         flash[:alert] = "Echec de la création !"
-        redirect_to gossip_path(params[:gossip_id])
+        redirect_to gossip_path(@comment.gossip.id)
       end
     end
   end

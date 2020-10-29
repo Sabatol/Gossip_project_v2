@@ -24,6 +24,8 @@ tags = []
 private_messages = []
 pm_users = []
 comments = []
+likes = []
+
 
 20.times do
   city = City.create(name: Faker::Address.city, zip_code: Faker::Address.zip_code)
@@ -65,4 +67,9 @@ end
 100.times do
   comment = Comment.create(content: Faker::Games::WorldOfWarcraft.quote, user: users.sample, gossip: gossips.sample)
   comments << comment
+end
+
+100.times do
+  like = Like.create(user: users.sample, gossip: gossips.sample)
+  likes << like
 end

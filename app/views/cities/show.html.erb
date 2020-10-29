@@ -2,7 +2,7 @@
   <h2>Ville : <%= @city.name %></h2>
   <p>Zip_code : <%= @city.zip_code%></p>  
 
-  
+  <!--Affiche toutes les commères de la ville-->
         <% @city.users.each do |user|%>
           <p>Prénom : <%= user.first_name%></p>
           <p>Nom : <%= user.last_name%></p>
@@ -10,6 +10,7 @@
           <p>Email : <%= user.email%></p>
           <p>Age : <%= user.age%></p>
           <p><% user.gossips.each do |gossip|%></p>
+  <!--Affiche tous les potins pour chaque commère-->
           <div class="card">
             <div class="card-header">
               Potin n°<%= gossip.id%>
@@ -20,6 +21,20 @@
                 <footer class="blockquote-footer"><%= gossip.user[:first_name]%><cite title="Source Title"> <%= gossip.title%></cite></footer>
               </blockquote>
             </div>
+  <!--Partie like -->
+          <display-4>
+            <%="#{gossip.likes.count} "%>
+              <% if current_user %>
+                <% if get_like(current_user, gossip) %>
+                <span><%= link_to  "", gossip_like_path(gossip.id, get_like(current_user, gossip).id), method: :delete, class:"fas fa-thumbs-up fa-lg" %></span>
+                <% else %>
+                <span><%= link_to  "", gossip_likes_path(gossip.id), method: :create, class:"far fa-thumbs-up fa-lg" %></span>
+                <% end %>
+              <% else %>
+                <i class="far fa-thumbs-up fa-lg"></i>
+              <% end %>
+          </display-4>
+
           </div>
           <br/>
           <br/>

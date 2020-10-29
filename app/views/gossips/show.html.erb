@@ -1,11 +1,29 @@
 <div class="container d-flex justify-content-center">
+
   <div class="card">
+
     <div class="card-header">
       Potin n°<%= @gossip.id%>
     </div>
+
     <div class="card-body">
       <h3>Intitulé du gossip : <%= @gossip.title %></h3>
       <p class="pt-5"><%= @gossip.content %></p>
+
+  <!-- Les likes c'est ici que ça se passe ! --> 
+    <display-4><%="#{@gossip.likes.count} "%></display-4>
+    <% if current_user %>
+      <% if get_like(current_user, @gossip) %>
+      <span><%= link_to  "", gossip_like_path(@gossip.id, get_like(current_user, @gossip).id), method: :delete, class:"fas fa-thumbs-up fa-2x" %></span>
+      <% else %>
+      <span><%= link_to  "", gossip_likes_path(@gossip.id), method: :create, class:"far fa-thumbs-up fa-2x" %></span>
+      <% end %>
+    <% else %>
+      <i class="far fa-thumbs-up fa-2x"></i>
+    <% end %>
+    
+
+  <!-- Boutons supprimer et modifier -->
       <div class="row text-center mt-5">
         <div class="col-6">
           <%= link_to  "Supprimer le potin", gossip_path(@gossip.id), method: :delete, data:{confirm: "Tu veux vraiment supprimer ce potin ?"}, class:"btn btn-lg btn-danger"  %>
@@ -15,17 +33,18 @@
         </div>
       </div>
     </div>
-    <!--comments-->
-    <div class="my-5">
-      <div class="my-5">
-        <%= form_with url: gossip_comments_path(@gossip.id, ) do |f| %>
-          <label>Ajouter un commentaire</label>
-          <%= f.text_area :content, class: 'form-control' %>
-          <div class="text-right">
-            <%= f.submit "Envoyer", class: "btn btn-sm btn-primary" %>
-          </div>
-        <% end %>
+
+    <!-- Ecrire un nouveau commentaire -->
+    <h2>Commentaires</h2>
+      <div class="form-group m-3">
+            <%= form_tag gossip_comments_path(@gossip.id), method: "post" do %>
+              <%= label_tag 'Écrire un commentaire' %>
+              <%= text_area_tag 'content', "", class: "form-control" %>
+              <%= submit_tag "Créer commentaire",  class: "btn btn-primary my-4" %>
+            <% end %>
       </div>
+
+    <!-- Afficher les commentaires avec la possibilité de voir les boutons edit et supp si log.user = comment.user -->
       <% if @gossip.comments %>
         <div class="py-3">
           <% @gossip.comments.each do |comment| %>
