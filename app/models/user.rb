@@ -5,6 +5,9 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :age, presence: true
 
+  has_secure_password
+  validates :password, presence: true, length: {minimum: 6}
+
   belongs_to :city
   has_many :gossips
   has_many :send_messages, class_name: "PrivateMessage"

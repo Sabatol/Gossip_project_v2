@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
   def say_hello
-    @gossips = Gossip.all
+    @user = User.find(params[:id])
   end
 end
