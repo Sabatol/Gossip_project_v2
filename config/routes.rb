@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   resources :gossips do
     resources :comments
   end
-
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :session, only: [:new, :create, :destroy]
   resources :user 
   resources :cities
+  resources :likes
 end

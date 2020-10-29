@@ -33,10 +33,12 @@
               <div class="text-right my-2 mr-2">
               </div>
               <div class="m-2 p-2">
-              <%= link_to  "Modifier le commentaire", edit_gossip_comment_path(@gossip.id, comment.id), class:"btn btn-info" %>
-              <%= link_to  "Supprimer le commentaire", gossip_comment_path(@gossip.id, comment.id), method: :delete, data:{confirm: "Tu veux vraiment supprimer ce commentaire ?"}, class:"btn btn-danger" %>
                 <%= comment.content %>
                 <i><%= comment.user[:first_name] %></i>
+              <% if session[:user_id] == comment.user_id %> 
+              <%= link_to  "Modifier le commentaire", edit_gossip_comment_path(@gossip.id, comment.id), class:"btn btn-sm btn-info" %>
+              <%= link_to  "Supprimer le commentaire", gossip_comment_path(@gossip.id, comment.id), method: :delete, data:{confirm: "Tu veux vraiment supprimer ce commentaire ?"}, class:"btn btn-sm btn-danger" %>
+              <% end %>
                 <br/>
               </div>
             </div>

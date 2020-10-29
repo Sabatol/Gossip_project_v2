@@ -13,4 +13,5 @@ class User < ApplicationRecord
   has_many :send_messages, class_name: "PrivateMessage"
   has_many :received_messages, class_name: "PrivateMessage", through: :pm_users
   has_many :comments
+  has_many :likes
 end
