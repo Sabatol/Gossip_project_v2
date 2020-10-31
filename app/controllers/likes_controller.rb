@@ -9,16 +9,17 @@ class LikesController < ApplicationController
     current_user = User.find_by(id: session[:user_id])
     @like = Like.new(gossip_id: params[:gossip_id], user: current_user)
     if @like.save
-      redirect_to gossip_path(params[:gossip_id])
+      # Reste sur la même page, si erreur redirige vers root
+      redirect_back(fallback_location: root_path)
     else
-      redirect_to gossip_path(params[:gossip_id])
+      redirect_back(fallback_location: root_path)
     end
   end
 
   def destroy
     @like = Like.find(params[:id])
     @like.destroy
-    redirect_to gossip_path(params[:gossip_id])
+    redirect_back(fallback_location: root_path)
   end
 
   private 

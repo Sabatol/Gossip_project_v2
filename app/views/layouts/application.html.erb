@@ -11,56 +11,64 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 <!-- FontAwesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous"> 
+<!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"> 
 <!--ligne du paradis-->
     <%= javascript_include_tag 'application' %>
 
   </head>
 <body>
 <header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">THP</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <%= %>
-      <%= link_to "Accueil", root_path, :class =>"nav-link" %>
-      </li>    
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">THP</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
 
-      <li class="nav-item">
-      <%= link_to "Notre équipe", team_path, :class =>"nav-link" %>
-      </li>
-      <li class="nav-item">
-      <%= link_to "Contact", contact_path, :class =>"nav-link" %>
-      </li>      
+        <li class="nav-item active">
+          <%= %>
+        <%= link_to "Accueil", root_path, :class =>"nav-link" %>
+        </li>    
 
-      <% if session[:user_id] == nil %>
-        <div class="dropdown">
-          <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Se connecter/S'inscrire
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <%= link_to "S'inscrire", new_user_path, :class =>"dropdown-item" %>
-            <%= link_to "Se connecter", new_session_path, :class =>"dropdown-item" %>
-          </div>
-        </div>
-
-      <% else %>
         <li class="nav-item">
-        <%= link_to "Créer un Gossip", new_gossip_path, :class =>"btn btn-primary" %>
+        <%= link_to "Notre équipe", team_path, :class =>"nav-link" %>
         </li>
         <li class="nav-item">
-        <%= link_to "Se déconnecter", session_path(session.id), method: :delete, data:{confirm: "Tu veux vraiment te déconnecter ?"}, :class =>"btn btn-danger" %>
+        <%= link_to "Contact", contact_path, :class =>"nav-link" %>
         </li>      
-      <% end %>
-    </ul>
+
+        <div class="d-flex justify-content-end">
+          <% if current_user %>
+            <li class="nav-item">
+            <%= link_to "Créer un Gossip", new_gossip_path, :class =>"btn btn-primary" %>
+            </li>
+            <li class="nav-item">
+            <%= link_to "Se déconnecter", session_path(session.id), method: :delete, data:{confirm: "Tu veux vraiment te déconnecter ?"}, :class =>"btn btn-danger" %>
+            </li>      
+
+          <% else %>
+            <div class="dropdown">
+              <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Se connecter/S'inscrire
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <%= link_to "S'inscrire", new_user_path, :class =>"dropdown-item" %>
+                <%= link_to "Se connecter", new_session_path, :class =>"dropdown-item" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </ul>
   </div>
   </nav>
 </header>
 
-  
+
+
     <%= yield %>
 
 <!-- Javascript optionnel ! A mettre en fin pour fluidifier le chargement de la page -->

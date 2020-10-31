@@ -5,16 +5,36 @@
 
 .card {
   border: 100px solid black;
-  -webkit-box-shadow: 3px 3px 0px 2px rgba(0,0,0,0.12); 
-  box-shadow: 3px 3px 0px 2px rgba(0,0,0,0.12);
+  -webkit-box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0); 
+  box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
   margin-right: 2rem;
   margin-left: 2rem;
+  
   }
 
 
 h1 {
 
   letter-spacing: .15em;
-  text-shadow: 1px -1px 0 #767676, -1px 2px 1px #737272, -2px 4px 1px #767474, -3px 6px 1px #787777, -4px 8px 1px #7b7a7a, -5px 10px 1px #7f7d7d, -6px 12px 1px #828181, -7px 14px 1px #868585, -8px 16px 1px #8b8a89, -9px 18px 1px #8f8e8d, -10px 20px 1px #949392, -11px 22px 1px #999897, -12px 24px 1px #9e9c9c;
+  text-shadow: 1px -1px 0 #767676, -1px 2px 1px #737272, -2px 4px 1px #767474, -3px 6px 1px #787777, -4px 8px 1px #7b7a7a, -5px 10px 1px #7f7d7d, -6px 12px 1px #828181;
 
+}
+
+.titre {
+  font-family: 'Rock Salt', cursive;
+}
+
+.gossip-font {
+  font-family: 'Pacifico', cursive;
+}
+
+.jumbotron {
+  background-image: url("https://woody.cloudly.space/app/uploads/cotelandesnature/2019/09/thumbs/sunsetlesley-williamson-1920x960.jpg");
+  background-size: cover;
+  color: white;
+  font-family: 'Rock Salt', cursive;
+}
+
+.btn {
+  font-family: Arial, Helvetica, sans-serif;
 }

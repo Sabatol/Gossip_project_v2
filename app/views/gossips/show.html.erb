@@ -8,29 +8,33 @@
 
     <div class="card-body">
       <h3>Intitulé du gossip : <%= @gossip.title %></h3>
-      <p class="pt-5"><%= @gossip.content %></p>
+      <p class="pt-5 gossip-font"><%= @gossip.content %></p>
 
   <!-- Les likes c'est ici que ça se passe ! --> 
     <display-4><%="#{@gossip.likes.count} "%></display-4>
     <% if current_user %>
       <% if get_like(current_user, @gossip) %>
-      <span><%= link_to  "", gossip_like_path(@gossip.id, get_like(current_user, @gossip).id), method: :delete, class:"fas fa-thumbs-up fa-2x" %></span>
+      <span><%= link_to  "", gossip_like_path(@gossip.id, get_like(current_user, @gossip).id), method: :delete, class:"fas fa-heart fa-2x", style: "text-decoration : none" %></span>
       <% else %>
-      <span><%= link_to  "", gossip_likes_path(@gossip.id), method: :create, class:"far fa-thumbs-up fa-2x" %></span>
+      <span><%= link_to  "", gossip_likes_path(@gossip.id), method: :create, class:"far fa-heart fa-2x", style: "text-decoration : none" %></span>
       <% end %>
     <% else %>
-      <i class="far fa-thumbs-up fa-2x"></i>
+      <i class="far fa-heart fa-2x"></i>
     <% end %>
     
 
   <!-- Boutons supprimer et modifier -->
       <div class="row text-center mt-5">
+          <% if current_user == @gossip.user %>
+
         <div class="col-6">
           <%= link_to  "Supprimer le potin", gossip_path(@gossip.id), method: :delete, data:{confirm: "Tu veux vraiment supprimer ce potin ?"}, class:"btn btn-lg btn-danger"  %>
         </div>
         <div class="col-6">
           <%= link_to  "Modifier le potin", edit_gossip_path(@gossip.id), class:"btn btn-lg btn-info" %>
         </div>
+
+          <% end %>
       </div>
     </div>
 

@@ -9,8 +9,12 @@
       <br /> <br />
 
       <%= label_tag 'Mot de passe' %> <br/>
-      <%= text_area_tag 'password' %>
+      <%= password_field_tag 'password' %>
       <br /> <br />
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="blablabla">Se souvenir de moi</label>
+      </div>
 
       <%= submit_tag "Login" %>
       <br/>

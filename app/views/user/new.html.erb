@@ -27,11 +27,11 @@
       <br /> <br />
 
       <%= label_tag 'Nom' %> <br/>
-      <%= text_area_tag 'last_name', @user.last_name %>
+      <%= text_field_tag 'last_name', @user.last_name %>
       <br /> <br />    
       
       <%= label_tag 'Ton âge' %> <br/>
-      <%= text_area_tag 'age', @user.age %>
+      <%= text_field_tag 'age', @user.age %>
       <br /> <br />
 
       <%= label_tag 'Description' %> <br/>
@@ -39,36 +39,21 @@
       <br /> <br />
 
       <%= label_tag 'Email' %> <br/>
-      <%= text_area_tag 'email', @user.email %>
+      <%= text_field_tag 'email', @user.email %>
       <br /> <br />
 
-      <%= label_tag 'Ton n° de Ville' %> <br/>
-      <%= text_area_tag 'city_id', @user.city_id %>
-      <br /> <br />
+      <%= label_tag 'Ville' %> <br />
+      <%= select_tag 'city_id', options_from_collection_for_select(City.all, "id", "name")%>
+      <br /> <br /> 
 
       <%= label_tag 'Mot de passe' %> <br/>
-      <%= text_area_tag 'password', @user.password %>
+      <%= password_field_tag 'password', @user.password %>
       <br /> <br />
-
-
 
       <%= submit_tag "Create user" %>
       <br/>
       <br/>
 
-
-      <% if @user.save %>
-        <div class="alert alert-success" role="alert">
-          <strong>Nice !</strong> Ton user a été créé avec succès !
-        </div>
-      <% end %>
-
-
-      <% if flash[:alert]%>
-        <div class="alert alert-danger" role="alert">
-          <strong>Echec !</strong> Une erreur s'est produite dans la création de ton user !
-        </div>
-      <% end %>
 
 
     <% end %>

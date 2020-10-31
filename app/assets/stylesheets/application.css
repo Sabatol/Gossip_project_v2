@@ -29,3 +29,8 @@ h1 {
 p {
   text-align: justify;
 }
+
+html, body, header {
+  margin: 0;
+  padding: 0;
+}

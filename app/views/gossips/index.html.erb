@@ -6,53 +6,73 @@
     <!-- On peut avoir d'autres méta-données ici -->
   </head>
   <body>
-      <br/>
-      <br/>
-    <h1><strong>PAGE D'ACCUEIL</strong></h1>
-      <br/>
-      <br/>
-      <h3>Bienvenue !</h3>
-      <br/>
-      <br/>
+
+  <!-- Jumbotron -->
+  <div class="jumbotron">
+    <br/>
+    <h1 class="display-4 titre">THE GOSSIP PROJECT</h1>
+    <br/>
+    <div class="text-center">
+    <br/>
+    <br/>
+    <%= link_to "Créer un Gossip", new_gossip_path, :class =>"btn btn-lg btn-primary" %>
+    </div>
+    <br/>
+    <br/>
+    <p class="lead text-center">Ceci est le nouveau concurrent officiel de facebook !</p>
+    <hr class="my-4">
+    <p class="text-right">Un grand merci à mes parents, mes amis, toussa toussa.</p>
+  </div>
+  <!-- Gossips cards -->
+    <br/>
     <div class="">
-    <% @gossips.each do |gossip|%>
+      <% @gossips.each do |gossip|%>
         <div class="card p-0">
           <div class="card-body">
+  <!--Partie like -->
+            <div class="d-flex justify-content-start">
+              <% if current_user %>
+                <% if get_like(current_user, gossip) %>
+                <span><%= link_to  "", gossip_like_path(gossip.id, get_like(current_user, gossip).id), method: :delete, class:"fas fa-heart fa-2x", style: "text-decoration : none" %></span>
+                <% else %>
+                <span><%= link_to  "", gossip_likes_path(gossip.id), method: :create, class:"far fa-heart fa-2x", style: "text-decoration : none" %></span>
+                <% end %>
+              <% else %>
+                <i class="far fa-heart fa-2x"></i>
+              <% end %>
+              
+              <%="#{gossip.likes.count}"%>
+              <br/>
+            </div>
+            <br/>
+  <!-- Contenu du gossip -->
           <blockquote class="blockquote mb-0">
-            <p><%= gossip.content%></p>
-
+            <div class="gossip-font">
+              <%= gossip.content%>
+            </div>
           </blockquote>
-            
-            <footer class="blockquote-footer"><%= gossip.user[:first_name]%><cite title="Source Title"> <%= gossip.title%></cite>
-
+            <footer class="blockquote-footer"><cite title="Source Title"> <%= gossip.title%>  </cite> 
+            <br/>
+            <br/>
+            <%# <FONT size="1pt"> from </FONT>  %>
+            <%= gossip.user[:first_name] %>
+  <!-- Gossip-boutons (accéder au gossip, à la ville et au profil) -->
       <br/>
-        <div class="d-flex justify-content-center">
-          <%= link_to "Accéder au gossip", gossip_path(gossip.id), :class =>"btn btn-md btn-info" %>
+        <div class="d-flex justify-content-end">
+          <%= link_to "Accéder au gossip", gossip_path(gossip.id), :class =>"btn btn-outline-dark" %>
           <br/>
-          <%= link_to "Accéder à la ville", city_path(gossip.user.city), :class =>"btn btn-md btn-info" %>
+          <%= link_to "Accéder au profil", user_path(gossip.user), :class =>"btn btn-outline-dark" %>
           <br/>
-          <%= link_to "Accéder au profil de l'utilisateur", user_path(gossip.user), :class =>"btn btn-md btn-info" %>
+          <%= link_to "Accéder à la ville", city_path(gossip.user.city), :class =>"btn btn-outline-dark" %>
         </div>
       <br/>
-      <br/>
+  <!-- Affichage du nombre de commentaire + lien vers le gossip en question -->
             <div class="d-flex justify-content-end">
               <%= link_to "#{gossip.comments.count} commentaires", gossip_path(gossip.id), :class =>"btn btn-outline-info"  %>
               <br/>
-  <!--Partie like -->
-              <% if current_user %>
-                <% if get_like(current_user, gossip) %>
-                <span><%= link_to  "", gossip_like_path(gossip.id, get_like(current_user, gossip).id), method: :delete, class:"fas fa-thumbs-up fa-2x" %></span>
-                <% else %>
-                <span><%= link_to  "", gossip_likes_path(gossip.id), method: :create, class:"far fa-thumbs-up fa-2x" %></span>
-                <% end %>
-              <% else %>
-                <i class="far fa-thumbs-up fa-2x"></i>
-              <% end %>
-              <br/>
-  <!--fin partie like-->
-              <br/>
-              <h4><%="(#{gossip.likes.count})"%></h4>
+
             </div>
+  <!-- fin partie comments -->
             </footer>
           </div>
         </div>
