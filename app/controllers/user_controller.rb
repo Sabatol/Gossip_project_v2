@@ -14,7 +14,7 @@ class UserController < ApplicationController
       puts "###################################"
       puts "Tu as été créé avec succès, bravo !"
       puts "###################################"
-      redirect_to welcome_path(@user.id)
+      redirect_to user_path(@user.id)
     else
       flash[:alert] = "Echec de la création !"
       render 'new' 
