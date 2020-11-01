@@ -44,15 +44,15 @@
               <%="#{gossip.likes.count}"%>
               <br/>
             </div>
+            <div class="d-flex justify-content-center titre">
+            <h3><i><%= gossip.title%></i></h3>
+            </div>
             <br/>
   <!-- Contenu du gossip -->
-          <blockquote class="blockquote mb-0">
-            <div class="gossip-font">
-              <%= gossip.content%>
-            </div>
-          </blockquote>
-            <footer class="blockquote-footer"><cite title="Source Title"> <%= gossip.title%>  </cite> 
-            <br/>
+          <div class="mb-0 text-center gossip-font">
+              <FONT size="5pt"> <%= gossip.content%> </FONT>
+          </div>
+            <footer class="footer">
             <br/>
             <%# <FONT size="1pt"> from </FONT>  %>
             <%= gossip.user[:first_name] %>

@@ -1,11 +1,4 @@
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <title>The comment Project</title>
-    <!-- On peut avoir d'autres méta-données ici -->
-  </head>
-  <body>
-    <!-- ... -->
+<body>
   <div class="text-center nt-5">
     <%= form_tag gossip_comment_path(@comment.gossip.id, @comment.id), method: "PUT" do %>
       <!-- Authenticity token sur une ligne -->
@@ -14,20 +7,8 @@
       <%= label_tag 'Content' %> <br/>
       <%= text_area_tag 'content' %>
       <br /> <br />
-
-      <%= submit_tag "Modifier un comment" %>
-      <br/>
-      <br/>
-
-      <% if flash[:alert]%>
-        <div class="alert alert-danger" role="alert">
-          <strong>Echec !</strong> Une erreur s'est produite lors de la modification de ton comment !
-        </div>
-      <% end %>
-
-
+      <%= submit_tag "Envoyer" %>
+      <br/> <br/>
     <% end %>
   </div>
-    <!-- ... -->
-  </body>
-</html>
+</body>

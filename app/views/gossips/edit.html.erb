@@ -1,37 +1,21 @@
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <title>The Gossip Project</title>
-    <!-- On peut avoir d'autres méta-données ici -->
-  </head>
-  <body>
+<body>
     <!-- ... -->
-  <div class="text-center nt-5">
-    <%= form_for @gossip do |gossip| %>
-      <!-- Authenticity token sur une ligne -->
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      
-      <%= label_tag 'Title' %> <br/>
-      <%= gossip.text_field 'title' %>
-      <br /> <br />
-
-      <%= label_tag 'Content' %> <br/>
-      <%= gossip.text_area 'content' %>
-      <br /> <br />
-
-      <%= submit_tag "Modifier un Gossip" %>
-      <br/>
-      <br/>
-
-      <% if flash[:alert]%>
-        <div class="alert alert-danger" role="alert">
-          <strong>Echec !</strong> Une erreur s'est produite lors de la modification de ton gossip !
-        </div>
+  <div class="d-flex justify-content-center d-flex align-items-center text-center">
+    <div class="card" style="width: 18rem;">
+      <%= form_for @gossip do |f| %>
+        <img src="data:image/jpeg;base64,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" class="card-img-top" alt="...">
+          <div class="form-group">
+            <label>Titre du gossip</label>
+            <%= f.text_field :title, class:'form-control' %>
+          </div><br /> <br />
+          <div class="form-group">
+            <label>Contenu du gossip</label>
+            <%= f.text_area :content, class:'form-control' %>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-large btn-primary">Modifier le potin</button>
+          </div>
       <% end %>
-
-
-    <% end %>
+    </div>
   </div>
-    <!-- ... -->
-  </body>
-</html>
+</body>

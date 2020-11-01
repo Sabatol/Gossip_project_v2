@@ -8,9 +8,11 @@
 
     <div class="card-body">
       <h3>Intitulé du gossip : <%= @gossip.title %></h3>
-      <p class="pt-5 gossip-font"><%= @gossip.content %></p>
-
+      <br/>
+      <div class="gossip-font"><FONT size="5pt"> <%= @gossip.content%> </FONT></div>
   <!-- Les likes c'est ici que ça se passe ! --> 
+      <br/>
+      <br/>
     <display-4><%="#{@gossip.likes.count} "%></display-4>
     <% if current_user %>
       <% if get_like(current_user, @gossip) %>
@@ -43,7 +45,7 @@
       <div class="form-group m-3">
             <%= form_tag gossip_comments_path(@gossip.id), method: "post" do %>
               <%= label_tag 'Écrire un commentaire' %>
-              <%= text_area_tag 'content', "", class: "form-control" %>
+              <%= text_field_tag 'content', "", class: "form-control" %>
               <%= submit_tag "Créer commentaire",  class: "btn btn-primary my-4" %>
             <% end %>
       </div>
