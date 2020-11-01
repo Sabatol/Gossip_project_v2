@@ -1,40 +1,82 @@
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <title>The Gossip Project</title>
-    <!-- On peut avoir d'autres méta-données ici -->
-  </head>  
-  <body>
-  <header>
+<body>
+      <ul class="nav nav-pills justify-content-center py-2" id="pills-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+            aria-controls="pills-home" aria-selected="true">Infos personnelles</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+            aria-controls="pills-profile" aria-selected="false">Description</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"
+            aria-controls="pills-contact" aria-selected="false">Les potins</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+          <br/>
+          <br/>
+          <br/>
+          <p> <strong>Prénom:</strong> <%= @user.first_name %> <br>
+          <strong>Nom:</strong> <%= @user.last_name%> <br>
+          <strong>Email:</strong> <%= @user.email%><br>
+          <strong>Age:</strong> <%= @user.age%><br>
+          <strong>City:</strong> <%= @user.city.name%></p>
+          <%= link_to "Plus d'informations sur la ville de #{@user.city.name}", city_path(@user.city.id) %>
+        </div>
+        <div class="tab-pane fade pr-5" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+        <br/>
+        <br/>
+        <br/>
+        <p><strong>Description du gossip-nerd:</strong> <%= @user.description%></p></div>
+          <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+            <br/>
+            <br/>
+            <br/>
+            <% @user.gossips.each do |gossip|%>
+              <div class="card">
+                <div class="card-body">
+          <!--Partie like -->
+                  <div class="d-flex justify-content-start">
+                    <i class="far fa-heart fa-2x"></i>
+                    <%="#{gossip.likes.count}"%>
+                    <br/>
+                  </div>
+                  <div class="d-flex justify-content-center titre">
+                    <h3><i><%= gossip.title%></i></h3>
+                  </div>
+                  <br/>
+          <!-- Contenu du gossip -->
+                  <div class="mb-0 text-center gossip-font">
+                      <FONT size="5pt"> <%= gossip.content%> </FONT>
+                  </div>
+                  <footer class="footer">
+                    <br/>
+                    <%# <FONT size="1pt"> from </FONT>  %>
+                    <%= gossip.user[:first_name] %>
+          <!-- Gossip-boutons (accéder au gossip, à la ville et au profil) -->
+                    <br/>
+                    <div class="d-flex justify-content-end">
+                      <%= link_to "Accéder au gossip", gossip_path(gossip.id), :class =>"btn btn-outline-dark" %>
+                      <br/>
+                      <%= link_to "Accéder au profil", user_path(gossip.user), :class =>"btn btn-outline-dark" %>
+                      <br/>
+                      <%= link_to "Accéder à la ville", city_path(gossip.user.city), :class =>"btn btn-outline-dark" %>
+                    </div>
+                  <br/>
+            <!-- Affichage du nombre de commentaire + lien vers le gossip en question -->
+                  <div class="d-flex justify-content-end">
+                    <%= link_to "#{gossip.comments.count} commentaires", gossip_path(gossip.id), :class =>"btn btn-outline-info"  %>
+                    <br/>
+                  </div>
+            <!-- fin partie comments -->
+                  </footer>
+                </div>
+              </div>
+              <br/>
+              <br/>
+            <% end %>
+</body>
 
-  </header>
-  <br/>
-  <br/>
-  <h1>VOUS ÊTES SUR LA PAGE DE <%= @user.first_name %> !</h1>
-  <ul>
-<li>Prénom : <%= @user.first_name %></li>
-<li>Nom : <%= @user.last_name%></li>
-<li>Email : <%= @user.email%></li>
-<li>Age : <%= @user.age%></li>
-<li>Ville : <%= @user.city[:name]%></li>
-<li>Description : <%= @user.description%></li></ul>
-    
-    <% @gossips.each do |gossip|%>
-      <div class="card">
-        <div class="card-header">
-          Potin n°<%= gossip.id%>
-        </div>
-        <div class="card-body">
-          <blockquote class="blockquote mb-0">
-            <p><%= gossip.content%></p>
-            <footer class="blockquote-footer"><%= gossip.user[:first_name]%><cite title="Source Title"> <%= gossip.title%></cite></footer>
-          </blockquote>
-        </div>
-      </div>
-      <br/>
-      <br/>
-      <br/>
-    <% end %>
-  </body>
-</html>
+

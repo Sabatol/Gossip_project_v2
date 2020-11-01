@@ -1,63 +1,71 @@
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <title>The Gossip Project</title>
-    <!-- On peut avoir d'autres méta-données ici -->
-  </head>
-  <body>
+<body>
     <!-- ... -->
-  <div class="text-center nt-5">
+  <div class="d-flex justify-content-center d-flex align-items-center text-center">
     <%= form_tag url_for(action: 'create'), method: "post" do %>
       <!-- Authenticity token sur une ligne -->
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
 
-      <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
+
+      <div class="card" style="width: 35rem;">
+        <img src="https://cdn.pixabay.com/photo/2017/01/14/10/56/men-1979261_960_720.jpg" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <br/>
+          <h5 class="card-title">Tu seras bien avec nous...</h5>
+
+          <p class="card-text text-center">  
+            <br/>
+            <%= label_tag 'Prénom' %> <br/>
+            <%= text_field_tag 'first_name', @user.first_name %>
+            <br /> <br />
+          </p>
+
+          <p class="card-text text-center">  
+            <%= label_tag 'Nom' %> <br/>
+            <%= text_field_tag 'last_name', @user.last_name %>
+            <br /> <br />    
+          </p>
+
+
+          <p class="card-text text-center">  
+            <%= label_tag 'Ton âge' %> <br/>
+            <%= text_field_tag 'age', @user.age %>
+            <br /> <br />
+          </p>
+
+
+          <p class="card-text text-center">  
+            <%= label_tag 'Description' %> <br/>
+            <%= text_area_tag 'description', @user.description %>
+            <br /> <br />
+          </p>
+
+
+          <p class="card-text text-center">  
+            <%= label_tag 'Email' %> <br/>
+            <%= text_field_tag 'email', @user.email %>
+            <br /> <br />
+          </p>
+
+
+          <p class="card-text text-center">  
+            <%= label_tag 'Ville' %> <br />
+            <%= select_tag 'city_id', options_from_collection_for_select(City.all, "id", "name")%>
+            <br /> <br /> 
+          </p>
+
+
+          <p class="card-text text-center">  
+            <%= label_tag 'Mot de passe' %> <br/>
+            <%= password_field_tag 'password', @user.password %>
+            <br /> <br />
+          </p>
+        
+          <%= submit_tag "C'est... OK !" %>
+          <br/>
+          <br/>
         </div>
       </div>
-
-
-      <%= label_tag 'Prénom' %> <br/>
-      <%= text_field_tag 'first_name', @user.first_name %>
-      <br /> <br />
-
-      <%= label_tag 'Nom' %> <br/>
-      <%= text_field_tag 'last_name', @user.last_name %>
-      <br /> <br />    
-      
-      <%= label_tag 'Ton âge' %> <br/>
-      <%= text_field_tag 'age', @user.age %>
-      <br /> <br />
-
-      <%= label_tag 'Description' %> <br/>
-      <%= text_area_tag 'description', @user.description %>
-      <br /> <br />
-
-      <%= label_tag 'Email' %> <br/>
-      <%= text_field_tag 'email', @user.email %>
-      <br /> <br />
-
-      <%= label_tag 'Ville' %> <br />
-      <%= select_tag 'city_id', options_from_collection_for_select(City.all, "id", "name")%>
-      <br /> <br /> 
-
-      <%= label_tag 'Mot de passe' %> <br/>
-      <%= password_field_tag 'password', @user.password %>
-      <br /> <br />
-
-      <%= submit_tag "Create user" %>
-      <br/>
-      <br/>
-
-
-
     <% end %>
   </div>
-    <!-- ... -->
-  </body>
-</html>
+</body>

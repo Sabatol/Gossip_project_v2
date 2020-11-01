@@ -15,13 +15,11 @@
     <div class="text-center">
     <br/>
     <br/>
-    <%= link_to "Créer un Gossip", new_gossip_path, :class =>"btn btn-lg btn-primary" %>
+    <%= link_to "Créer un Gossip", new_gossip_path, :class =>"btn btn-lg btn-outline-light" %>
     </div>
     <br/>
     <br/>
-    <p class="lead text-center">Ceci est le nouveau concurrent officiel de facebook !</p>
-    <hr class="my-4">
-    <p class="text-right">Un grand merci à mes parents, mes amis, toussa toussa.</p>
+    <p class="lead text-center">Partage donc tes meilleurs anecdotes avec la communauté !</p>
   </div>
   <!-- Gossips cards -->
     <br/>
@@ -30,7 +28,8 @@
         <div class="card p-0">
           <div class="card-body">
   <!--Partie like -->
-            <div class="d-flex justify-content-start">
+            <div class="titre d-flex justify-content-start">
+              <%=gossip.likes.count%>
               <% if current_user %>
                 <% if get_like(current_user, gossip) %>
                 <span><%= link_to  "", gossip_like_path(gossip.id, get_like(current_user, gossip).id), method: :delete, class:"fas fa-heart fa-2x", style: "text-decoration : none" %></span>
@@ -40,38 +39,30 @@
               <% else %>
                 <i class="far fa-heart fa-2x"></i>
               <% end %>
-              
-              <%="#{gossip.likes.count}"%>
-              <br/>
             </div>
+  <!-- Titre et contenu du gossip -->
             <div class="d-flex justify-content-center titre">
             <h3><i><%= gossip.title%></i></h3>
             </div>
             <br/>
-  <!-- Contenu du gossip -->
           <div class="mb-0 text-center gossip-font">
               <FONT size="5pt"> <%= gossip.content%> </FONT>
           </div>
             <footer class="footer">
-            <br/>
-            <%# <FONT size="1pt"> from </FONT>  %>
-            <%= gossip.user[:first_name] %>
-  <!-- Gossip-boutons (accéder au gossip, à la ville et au profil) -->
-      <br/>
-        <div class="d-flex justify-content-end">
-          <%= link_to "Accéder au gossip", gossip_path(gossip.id), :class =>"btn btn-outline-dark" %>
-          <br/>
-          <%= link_to "Accéder au profil", user_path(gossip.user), :class =>"btn btn-outline-dark" %>
-          <br/>
-          <%= link_to "Accéder à la ville", city_path(gossip.user.city), :class =>"btn btn-outline-dark" %>
-        </div>
-      <br/>
-  <!-- Affichage du nombre de commentaire + lien vers le gossip en question -->
-            <div class="d-flex justify-content-end">
-              <%= link_to "#{gossip.comments.count} commentaires", gossip_path(gossip.id), :class =>"btn btn-outline-info"  %>
               <br/>
-
-            </div>
+            <%# <FONT size="1pt"> from </FONT>  %>
+              <div class="titre">
+                <%= gossip.user[:first_name] %>
+              </div>
+  <!-- Gossip-boutons (accéder au gossip, à la ville et au profil) -->
+              <br/>
+              <div class="d-flex justify-content-end">
+                <%= link_to "Voir le profil", user_path(gossip.user), :class =>"btn btn-outline-dark" %>
+                <br/>
+                <%= link_to "#{gossip.comments.count} commentaires", gossip_path(gossip.id), :class =>"btn btn-outline-info"  %>
+                <br/>
+<!--                <%= link_to "Accéder à la ville", city_path(gossip.user.city), :class =>"btn btn-outline-dark" %>
+-->           </div>
   <!-- fin partie comments -->
             </footer>
           </div>

@@ -1,25 +1,37 @@
 <body>
-  <div class="text-center nt-5">
+  <div class="d-flex justify-content-center d-flex align-items-center text-center">
     <%= form_tag url_for(action: 'create'), method: "post" do %>
       <!-- Authenticity token sur une ligne -->
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
-      <%= label_tag 'Email' %> <br/>
-      <%= text_area_tag 'email' %>
-      <br /> <br />
 
-      <%= label_tag 'Mot de passe' %> <br/>
-      <%= password_field_tag 'password' %>
-      <br /> <br />
-      <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="blablabla">Se souvenir de moi</label>
+      <div class="card" style="width: 35rem;">
+        <img src="https://cdn.pixabay.com/photo/2015/04/27/11/48/sign-741813_960_720.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Tu crois t'es qui ?</h5>
+
+          <p class="card-text text-center">  
+            <%= label_tag 'Email' %> <br/>
+            <%= text_field_tag 'email' %>
+            <br /> <br />
+          </p>
+
+          <p class="card-text text-center">  
+            <%= label_tag 'Mot de passe' %> <br/>
+            <%= password_field_tag 'password' %>
+            <br /> <br />
+          </p>
+
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="blablabla">Se souvenir de moi</label>
+          </div>
+
+          <%= submit_tag "Login" %>
+          <br/>
+          <br/>
+        </div>
       </div>
-
-      <%= submit_tag "Login" %>
-      <br/>
-      <br/>
-
     <% end %>
   </div>
     <!-- ... -->

@@ -1,56 +1,60 @@
 <div class="container d-flex justify-content-center">
 
-  <div class="card">
+  <div class="card mt-5 mb-2">
 
     <div class="card-header">
       Potin n°<%= @gossip.id%>
     </div>
 
     <div class="card-body">
-      <h3>Intitulé du gossip : <%= @gossip.title %></h3>
       <br/>
-      <div class="gossip-font"><FONT size="5pt"> <%= @gossip.content%> </FONT></div>
+      <div class="gossip-font"><FONT size="4pt"><i><%= @gossip.title %></i></FONT></div>
+      <br/>
+      <div class="gossip-font text-center"><FONT size="5pt"> <%= @gossip.content%> </FONT></div>
+      <br/>
+      <div class="titre d-flex justify-content-end">
+        <FONT size="4pt"><%= @gossip.user[:first_name] %></FONT>
+      </div>
   <!-- Les likes c'est ici que ça se passe ! --> 
       <br/>
       <br/>
-    <display-4><%="#{@gossip.likes.count} "%></display-4>
-    <% if current_user %>
-      <% if get_like(current_user, @gossip) %>
-      <span><%= link_to  "", gossip_like_path(@gossip.id, get_like(current_user, @gossip).id), method: :delete, class:"fas fa-heart fa-2x", style: "text-decoration : none" %></span>
-      <% else %>
-      <span><%= link_to  "", gossip_likes_path(@gossip.id), method: :create, class:"far fa-heart fa-2x", style: "text-decoration : none" %></span>
-      <% end %>
-    <% else %>
-      <i class="far fa-heart fa-2x"></i>
-    <% end %>
-    
-
+      <div class="titre d-flex justify-content-end">
+        <%=@gossip.likes.count%>
+        <% if current_user %>
+          <% if get_like(current_user, @gossip) %>
+          <span><%= link_to  "", gossip_like_path(@gossip.id, get_like(current_user, @gossip).id), method: :delete, class:"fas fa-heart fa-2x", style: "text-decoration : none" %></span>
+          <% else %>
+          <span><%= link_to  "", gossip_likes_path(@gossip.id), method: :create, class:"far fa-heart fa-2x", style: "text-decoration : none" %></span>
+          <% end %>
+        <% else %>
+          <i class="far fa-heart fa-2x"></i>
+        <% end %>
+      </div>
   <!-- Boutons supprimer et modifier -->
       <div class="row text-center mt-5">
-          <% if current_user == @gossip.user %>
-
-        <div class="col-6">
-          <%= link_to  "Supprimer le potin", gossip_path(@gossip.id), method: :delete, data:{confirm: "Tu veux vraiment supprimer ce potin ?"}, class:"btn btn-lg btn-danger"  %>
-        </div>
-        <div class="col-6">
-          <%= link_to  "Modifier le potin", edit_gossip_path(@gossip.id), class:"btn btn-lg btn-info" %>
-        </div>
-
-          <% end %>
+        <% if current_user == @gossip.user %>
+          <div class="col-6">
+            <%= link_to  "Supprimer le potin", gossip_path(@gossip.id), method: :delete, data:{confirm: "Tu veux vraiment supprimer ce potin ?"}, class:"btn btn-lg btn-danger"  %>
+          </div>
+          <div class="col-6">
+            <%= link_to  "Modifier le potin", edit_gossip_path(@gossip.id), class:"btn btn-lg btn-info" %>
+          </div>
+        <% end %>
       </div>
     </div>
 
     <!-- Ecrire un nouveau commentaire -->
-    <h2>Commentaires</h2>
+    <span class="border-top">
+      <br/>
+      <h2>Commentaires (<%= @gossip.comments.count %>)</h2>
       <div class="form-group m-3">
-            <%= form_tag gossip_comments_path(@gossip.id), method: "post" do %>
-              <%= label_tag 'Écrire un commentaire' %>
-              <%= text_field_tag 'content', "", class: "form-control" %>
-              <%= submit_tag "Créer commentaire",  class: "btn btn-primary my-4" %>
-            <% end %>
+        <%= form_tag gossip_comments_path(@gossip.id), method: "post" do %>
+          <%= label_tag 'Écrire un commentaire' %>
+          <%= text_field_tag 'content', "", class: "form-control" %>
+          <%= submit_tag "Créer commentaire",  class: "btn btn-primary my-4" %>
+        <% end %>
       </div>
-
-    <!-- Afficher les commentaires avec la possibilité de voir les boutons edit et supp si log.user = comment.user -->
+      <!-- Afficher les commentaires avec la possibilité de voir les boutons edit et supp si log.user = comment.user -->
       <% if @gossip.comments %>
         <div class="py-3">
           <% @gossip.comments.each do |comment| %>
@@ -70,4 +74,5 @@
           <% end %>
         </div>
       <% end %>
-    </div>
+    </span>
+  </div>
